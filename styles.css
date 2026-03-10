@@ -1,0 +1,697 @@
+/* ============================================
+   CHIT FUND CALCULATOR - CSS STYLES
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2563eb;
+    --primary-dark: #1e40af;
+    --primary-light: #dbeafe;
+    --success-color: #16a34a;
+    --warning-color: #ea580c;
+    --background: #f8fafc;
+    --card-bg: #ffffff;
+    --text-dark: #1e293b;
+    --text-light: #64748b;
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--background);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.header {
+    text-align: center;
+    padding: 32px 0 24px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: white;
+    margin: -16px -16px 32px -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.header .subtitle {
+    font-size: 14px;
+    opacity: 0.95;
+    font-weight: 400;
+}
+
+/* ============================================
+   FORM STYLES
+   ============================================ */
+
+.input-section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+}
+
+.input-section h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: var(--text-dark);
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+}
+
+.form-group input[type="number"] {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.input-with-preset {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.input-with-preset input {
+    width: 100%;
+}
+
+.preset-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.preset-btn {
+    padding: 10px 12px;
+    background-color: var(--background);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+    transition: all 0.2s ease;
+}
+
+.preset-btn:hover {
+    background-color: var(--primary-light);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.preset-btn.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.help-text {
+    display: block;
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 6px;
+    font-weight: 400;
+}
+
+.calculate-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.calculate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+.calculate-btn:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+   RESULTS SECTION
+   ============================================ */
+
+.results-section {
+    animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.results-section h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.result-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.result-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text-dark);
+}
+
+/* Summary Card */
+
+.summary-card {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 1px solid #bae6fd;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-item .label {
+    font-size: 12px;
+    color: var(--text-light);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.summary-item .value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Calculation Logic */
+
+.calculation {
+    background-color: #fafbfc;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.calc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 14px;
+}
+
+.calc-row.divider {
+    border-top: 2px solid var(--border-color);
+    border-bottom: 2px solid var(--border-color);
+    padding: 12px 0;
+    margin: 8px 0;
+    font-weight: 600;
+}
+
+.calc-row:last-child {
+    border-bottom: none;
+}
+
+.calc-label {
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.calc-value {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.calc-value.highlight {
+    color: var(--primary-color);
+    font-size: 16px;
+}
+
+.calc-value.formula {
+    font-family: 'Courier New', monospace;
+    color: var(--warning-color);
+    font-size: 13px;
+}
+
+.calc-value.range {
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+/* FD Card */
+
+.fd-card {
+    border-left: 4px solid var(--primary-color);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.02) 0%, rgba(59, 130, 246, 0.02) 100%);
+}
+
+/* Chit Card */
+
+.chit-card {
+    border-left: 4px solid var(--success-color);
+    background: linear-gradient(135deg, rgba(22, 163, 74, 0.02) 0%, rgba(34, 197, 94, 0.02) 100%);
+}
+
+.breakeven-box {
+    background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+    border: 2px solid var(--warning-color);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.breakeven-label {
+    font-size: 13px;
+    color: var(--text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.breakeven-amount {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--warning-color);
+    margin-bottom: 4px;
+    font-family: 'Courier New', monospace;
+}
+
+.breakeven-desc {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+/* Recommendation Card */
+
+.recommendation-card {
+    border-left: 4px solid var(--success-color);
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+.recommendation-box {
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 4px solid var(--success-color);
+    line-height: 1.8;
+}
+
+.recommendation-box.chit-favorable {
+    border-left-color: var(--success-color);
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+}
+
+.recommendation-box.fd-favorable {
+    border-left-color: var(--warning-color);
+    background: linear-gradient(135deg, #fef3c7 0%, #fff7ed 100%);
+}
+
+.recommendation-box strong {
+    color: var(--text-dark);
+}
+
+.recommendation-box p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: var(--text-dark);
+}
+
+/* Chart Card */
+
+.chart-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+.comparison-chart {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.chart-item {
+    text-align: center;
+}
+
+.chart-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.chart-bar-container {
+    background-color: #f1f5f9;
+    border-radius: 8px;
+    height: 200px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.chart-bar {
+    width: 60%;
+    background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    border-radius: 8px 8px 0 0;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.fd-item .chart-bar {
+    background: linear-gradient(180deg, #3b82f6 0%, #1e40af 100%);
+}
+
+.chit-item .chart-bar {
+    background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+}
+
+.chart-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-dark);
+    font-family: 'Courier New', monospace;
+}
+
+/* ============================================
+   INFO SECTION
+   ============================================ */
+
+.info-section {
+    margin-top: 48px;
+    padding-bottom: 32px;
+}
+
+.info-section h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.info-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.info-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+}
+
+.info-card p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.reset-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--background);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 16px;
+}
+
+.reset-btn:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+.reset-btn:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+    text-align: center;
+    padding: 24px 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 48px;
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.footer p {
+    margin: 8px 0;
+}
+
+.footer .disclaimer {
+    font-size: 11px;
+    color: var(--warning-color);
+    font-weight: 500;
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+
+.main-content {
+    padding-bottom: 32px;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 600px) {
+    .header {
+        padding: 24px 0 16px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .header .subtitle {
+        font-size: 13px;
+    }
+
+    .input-section {
+        padding: 20px;
+        margin-bottom: 24px;
+    }
+
+    .input-section h2 {
+        font-size: 16px;
+    }
+
+    .preset-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .result-card {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+
+    .result-card h3 {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .summary-item .value {
+        font-size: 16px;
+    }
+
+    .breakeven-amount {
+        font-size: 28px;
+    }
+
+    .comparison-chart {
+        gap: 16px;
+    }
+
+    .chart-bar-container {
+        height: 150px;
+        margin-bottom: 8px;
+    }
+
+    .info-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .calc-row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 0;
+    }
+
+    .calc-value {
+        margin-top: 4px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .calculate-btn,
+    .reset-btn {
+        padding: 12px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 0 12px;
+    }
+
+    .header {
+        margin: -12px -12px 24px -12px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .input-section {
+        padding: 16px;
+    }
+
+    .result-card {
+        padding: 14px;
+    }
+
+    .breakeven-box {
+        padding: 16px;
+    }
+
+    .breakeven-amount {
+        font-size: 24px;
+    }
+
+    .summary-item .value {
+        font-size: 14px;
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.hidden {
+    display: none !important;
+}
+
+.visible {
+    display: block !important;
+}

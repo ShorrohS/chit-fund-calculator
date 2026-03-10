@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate and compare Chit Fund returns with Bank FD deposits. Find the breakeven amount for your chit investments.">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Chit Calculator">
+    <title>Chit Fund Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%232563eb' width='192' height='192'/><text x='96' y='130' font-size='120' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'>💰</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>💰 Chit Fund Calculator</h1>
+            <p class="subtitle">Compare Chit Returns vs Bank FD</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <h2>Enter Your Details</h2>
+                
+                <div class="form-group">
+                    <label for="chitAmount">Chit Amount (₹)</label>
+                    <input 
+                        type="number" 
+                        id="chitAmount" 
+                        placeholder="e.g., 100000" 
+                        value="100000"
+                        min="1000"
+                        step="1000"
+                    >
+                    <small class="help-text">Total amount you want to invest in chit</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="chitTerm">Chit Term (Months)</label>
+                    <input 
+                        type="number" 
+                        id="chitTerm" 
+                        placeholder="e.g., 12" 
+                        value="12"
+                        min="1"
+                        max="60"
+                        step="1"
+                    >
+                    <small class="help-text">Duration of chit investment</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="fdRate">Bank FD Interest Rate (% p.a.)</label>
+                    <div class="input-with-preset">
+                        <input 
+                            type="number" 
+                            id="fdRate" 
+                            placeholder="e.g., 9" 
+                            value="9"
+                            min="0.1"
+                            max="15"
+                            step="0.1"
+                        >
+                        <div class="preset-buttons">
+                            <button class="preset-btn" data-rate="8">8%</button>
+                            <button class="preset-btn" data-rate="9">9%</button>
+                            <button class="preset-btn" data-rate="10">10%</button>
+                            <button class="preset-btn" data-rate="11">11%</button>
+                        </div>
+                    </div>
+                    <small class="help-text">Current benchmark FD rate (default 9%)</small>
+                </div>
+
+                <button class="calculate-btn" id="calculateBtn">Calculate</button>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h2>Results & Analysis</h2>
+
+                <!-- Investment Summary -->
+                <div class="result-card summary-card">
+                    <h3>Investment Summary</h3>
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <span class="label">Initial Investment</span>
+                            <span class="value">₹<span id="summaryInitial">0</span></span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Term</span>
+                            <span class="value"><span id="summaryTerm">0</span> months</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">FD Rate Used</span>
+                            <span class="value"><span id="summaryRate">0</span>%</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Years</span>
+                            <span class="value"><span id="summaryYears">0</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bank FD Comparison -->
+                <div class="result-card fd-card">
+                    <h3>Bank FD Returns</h3>
+                    <div class="calculation logic">
+                        <div class="calc-row">
+                            <span class="calc-label">Principal Amount:</span>
+                            <span class="calc-value">₹<span id="fdPrincipal">0</span></span>
+                        </div>
+                        <div class="calc-row">
+                            <span class="calc-label">Interest Rate:</span>
+                            <span class="calc-value"><span id="fdDisplayRate">0</span>% p.a.</span>
+                        </div>
+                        <div class="calc-row">
+                            <span class="calc-label">Time Period:</span>
+                            <span class="calc-value"><span id="fdDisplayYears">0</span> years</span>
+                        </div>
+                        <div class="calc-row">
+                            <span class="calc-label">Formula:</span>
+                            <span class="calc-value formula">A = P(1 + r/100)^t</span>
+                        </div>
+                        <div class="calc-row divider">
+                            <span class="calc-label">Maturity Amount:</span>
+                            <span class="calc-value highlight">₹<span id="fdMaturity">0</span></span>
+                        </div>
+                        <div class="calc-row">
+                            <span class="calc-label">Total Interest Earned:</span>
+                            <span class="calc-value">₹<span id="fdInterest">0</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chit Fund Breakeven Analysis -->
+                <div class="result-card chit-card">
+                    <h3>Chit Fund Breakeven Analysis</h3>
+                    <div class="breakeven-box">
+                        <div class="breakeven-label">Minimum Chit Call Amount (Breakeven)</div>
+                        <div class="breakeven-amount">₹<span id="breakeven">0</span></div>
+                        <small class="breakeven-desc">To match FD returns</small>
+                    </div>
+                    
+                    <div class="calculation logic">
+                        <div class="calc-row">
+                            <span class="calc-label">Chit Investment:</span>
+                            <span class="calc-value">₹<span id="chitDisplayAmount">0</span></span>
+                        </div>
+                        <div class="calc-row">
+                            <span class="calc-label">Typical Chit Discount:</span>
+                            <span class="calc-value"><span id="discountPercent">5-10</span>% (estimated)</span>
+                        </div>
+                        <div class="calc-row">
+                            <span class="calc-label">Estimated Call Amount:</span>
+                            <span class="calc-value range">₹<span id="estimatedMin">0</span> - ₹<span id="estimatedMax">0</span></span>
+                        </div>
+                        <div class="calc-row divider">
+                            <span class="calc-label">Breakeven Amount:</span>
+                            <span class="calc-value highlight">₹<span id="breakevenValue">0</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison & Recommendation -->
+                <div class="result-card recommendation-card">
+                    <h3>💡 Recommendation</h3>
+                    <div id="recommendationBox" class="recommendation-box"></div>
+                </div>
+
+                <!-- Profit Comparison Chart -->
+                <div class="result-card chart-card">
+                    <h3>Profit Comparison</h3>
+                    <div class="comparison-chart">
+                        <div class="chart-item fd-item">
+                            <div class="chart-label">FD Profit</div>
+                            <div class="chart-bar-container">
+                                <div class="chart-bar" id="fdBar"></div>
+                            </div>
+                            <div class="chart-value">₹<span id="fdProfitDisplay">0</span></div>
+                        </div>
+                        <div class="chart-item chit-item">
+                            <div class="chart-label">Chit (at Breakeven)</div>
+                            <div class="chart-bar-container">
+                                <div class="chart-bar" id="chitBar"></div>
+                            </div>
+                            <div class="chart-value">₹<span id="chitProfitDisplay">0</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="reset-btn" id="resetBtn">← Calculate Again</button>
+            </section>
+
+            <!-- Info Section -->
+            <section class="info-section">
+                <h2>How Chit Funds Work</h2>
+                <div class="info-cards">
+                    <div class="info-card">
+                        <h4>What is a Chit Fund?</h4>
+                        <p>A chit fund is a savings and borrowing scheme where a group agrees to contribute fixed amounts regularly and take turns receiving the total corpus, with a discount.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>How Chit Calling Works</h4>
+                        <p>When you "call" the chit, you receive the corpus amount minus a discount. The discount depends on demand and economic conditions.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Chit vs Bank FD</h4>
+                        <p>This calculator helps you find the breakeven amount - the minimum you need from your chit to match bank FD returns, accounting for the discount.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>📱 Chit Fund Calculator v1.0 | Designed for Android & iOS</p>
+            <p class="disclaimer">⚠️ This is an educational tool. Consult financial advisors for actual investment decisions.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('✓ ServiceWorker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('✗ ServiceWorker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
